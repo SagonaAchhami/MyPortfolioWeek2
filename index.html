@@ -64,14 +64,15 @@ Academic Skills</h2>
         </div>
     </div>
  </section>
- <section id="contact">
- 	 <h1 style="color:seagreen; font-size: 40px;">Contact me</h1>
-      <div class="contact">
-        <input type="text" placeholder="Name" class="text"><br>
-        <input type="email" placeholder="Email" class="text"><br>
-        <input type="textarea" placeholder="Message" class="text"><br>
-        <button class="button">Send</button>
-      </div>
- </section>
+<section id="contact">
+  <h1 style="color:seagreen; font-size: 40px;">Contact me</h1>
+  <form id="contact-form-id" class="contact">
+      <input type="text" placeholder="Name" class="text" required><br>
+      <input type="email" placeholder="Email" class="text" required><br>
+      <textarea placeholder="Message" class="text" required></textarea><br>
+      <button class="button" type="submit">Send</button>
+  </form>
+  <div id="form-message"></div>
+</section>
 </body>
 </html>
