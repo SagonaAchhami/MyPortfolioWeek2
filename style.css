@@ -2,6 +2,7 @@
 /*background-color:lightgray;*/
 font-family: sans-serif;
 align-items: center;
+
 }
 
 nav{
@@ -126,4 +127,9 @@ header, section, footer {
     nav a {
         display: none;
     }
+}
+
+.nav-links.open {
+    display: flex;
+    flex-direction: column;
 }
