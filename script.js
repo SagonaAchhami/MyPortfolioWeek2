@@ -1,40 +1,42 @@
-// Menu Toggle
 const menuButton = document.getElementById("menu-button");
-const navLinks = document.getElementById("nav-links");
+const navLinks = document.querySelector(".nav-links");
 
 menuButton.addEventListener("click", () => {
-    navLinks.classList.toggle("open");
+    const isOpen = navLinks.classList.toggle("open");
+    menuButton.innerHTML = isOpen ? "✕" : "☰";
+    menuButton.setAttribute("aria-expanded", isOpen);
 });
 
-// Scroll Progress Bar
-const progress = document.getElementById("scroll-progress");
+document.querySelectorAll(".nav-links a").forEach(link =>
+    link.addEventListener("click", () => {
+        if (navLinks.classList.contains("open")) {
+            navLinks.classList.remove("open");
+            menuButton.innerHTML = "☰";
+            menuButton.setAttribute("aria-expanded", false);
+        }
+    })
+);
 
+const scrollBar = document.getElementById("scroll-progress");
 window.addEventListener("scroll", () => {
-    const height = document.documentElement.scrollHeight - window.innerHeight;
-    const scrolled = (window.scrollY / height) * 100;
-    progress.style.width = scrolled + "%";
+    scrollBar.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100 + "%";
 });
 
-// Form Handling
-const form = document.getElementById("contact-form-id");
-const msg = document.getElementById("form-message");
+const contactForm = document.getElementById("contact-form-id");
+const messageDiv = document.getElementById("form-message");
 
-const name = document.getElementById("name");
-const email = document.getElementById("email");
-const message = document.getElementById("message");
-
-form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    if (!name.value || !email.value || !message.value) {
-        msg.textContent = "Please fill all fields.";
-        msg.style.color = "red";
-    } else {
-   msg.textContent = "Message sent successfully!";
-        msg.style.color = "lightgreen";
-        form.reset();
-    }
-});
-
-// Footer Year
-document.getElementById("year").textContent = new Date().getFullYear();
+if (contactForm && messageDiv) {
+    const [nameInput, emailInput, messageInput, phoneInput] = contactForm.querySelectorAll("input");
+    [nameInput, emailInput, messageInput, phoneInput].forEach((input, i) => input.id = ["name","email","message","phone"][i]);
+  contactForm.addEventListener("submit", e => {
+        e.preventDefault();
+        if (![nameInput, emailInput, messageInput, phoneInput].every(input => input.value.trim())) {
+            messageDiv.textContent = "Please fill out all fields.";
+            messageDiv.style.color = "red";
+            return;
+        }
+        messageDiv.textContent = "Thank you for your message! I will get back to you soon.";
+        messageDiv.style.color = "green";
+        contactForm.reset();
+   });
+}

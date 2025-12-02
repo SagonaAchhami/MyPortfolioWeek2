@@ -114,3 +114,16 @@ header, section, footer {
     gap: 80px; 
      margin-bottom:200px ;
 }
+#menu-button {
+    display: none;
+}
+@media (max-width: 768px) {
+    #menu-button {
+        display: block;
+    }
+
+    /* Optionally hide desktop links on small screens */
+    nav a {
+        display: none;
+    }
+}
